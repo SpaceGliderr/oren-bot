@@ -1,0 +1,28 @@
+{
+  "name": "oren-bot",
+  "version": "1.0.0",
+  "description": "Discord bot that manages servers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/SpaceGliderr/oren-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "server"
+  ],
+  "author": "Nicholas Lee (Nicki)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpaceGliderr/oren-bot/issues"
+  },
+  "homepage": "https://github.com/SpaceGliderr/oren-bot#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  }
+}
