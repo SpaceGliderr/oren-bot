@@ -4,9 +4,11 @@ import * as fs from 'fs';
 import { forEach } from 'lodash';
 import path from 'path/posix';
 import { IEvent } from './interfaces/event.interface';
+import { PrismaClient } from '@prisma/client';
 
 class SuperClient extends Client {
   public commands: Collection<unknown, ICommand> = new Collection();
+  public prisma: PrismaClient = new PrismaClient({});
 
   constructor() {
     super({
