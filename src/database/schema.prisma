@@ -7,11 +7,59 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// TODO: Base model for each record (id, createdAt, updatedAt)
+// TODO: Consider removing some createdAts and updatedAts where it is not needed
+// Note: `id` attribute here is just in case Discord changes their data structures in the future / extra stuff I can do
 model User {
-    id Int @default(autoincrement()) @id
-    createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
-    username String
-    discriminator String
-    defaultAvatarURL String?
+  id String @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  username String
+  discriminator String
+  defaultAvatarURL String?
+  guildMembers GuildMember[]
+}
+
+model Guild {
+  id String @id
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  guildMembers GuildMember[]
+  giveaways Giveaway[]
+}
+
+model GuildMember {
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  guild Guild @relation(fields: [guildId], references: [id])
+  guildId String
+  giveaways GiveawayParticipants[]
+}
+
+model Giveaway {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  prize String
+  numberOfWinners Int
+  channel String
+  period String
+  requirements Json
+  isOngoing Boolean
+  participants GiveawayParticipants[]
+  guild Guild @relation(fields: [guildId], references: [id])
+  guildId String
+}
+
+model GiveawayParticipants {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  messageCount Int
+  flag Int
+  giveaway Giveaway @relation(fields: [giveawayId], references: [id])
+  giveawayId String
+  guildMember GuildMember @relation(fields: [guildMemberId], references: [id])
+  guildMemberId String
 }
